@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Engineer Portfolio - Retro Gaming Style</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        :root {
+            --primary: #00ff00;
+            --secondary: #ff00ff;
+            --background: #000033;
+            --text: #ffffff;
+            --accent: #ffcc00;
+            --pixel-size: 2px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 0, 51, 0.9), rgba(0, 0, 51, 0.9)),
+                url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm33.414-6l5.95-5.95L45.95.636 40 6.586 34.05.636 32.636 2.05 38.586 8l-5.95 5.95 1.414 1.414L40 9.414l5.95 5.95 1.414-1.414L41.414 8zM40 48c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM9.414 40l5.95-5.95-1.414-1.414L8 38.586l-5.95-5.95L.636 34.05 6.586 40l-5.95 5.95 1.414 1.414L8 41.414l5.95 5.95 1.414-1.414L9.414 40z' fill='%230088ff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        header {
+            padding: 2rem 0;
+            background: linear-gradient(to right, #000066, #000044);
+            border-bottom: var(--pixel-size) solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border: var(--pixel-size) solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .pixelated {
+            image-rendering: pixelated;
+        }
+        
+        .profile-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            animation: scanline 8s linear infinite;
+            opacity: 0.5;
+        }
+        
+        @keyframes scanline {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(180px);
+            }
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 4px 4px 0px rgba(255, 0, 255, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .title {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: var(--pixel-size) solid var(--primary);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 3;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        nav ul li a::before {
+            content: '[ ';
+            color: var(--secondary);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a::after {
+            content: ' ]';
+            color: var(--secondary);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+        
+        nav ul li a:hover::before, 
+        nav ul li a:hover::after {
+            opacity: 1;
+        }
+        
+        .active a {
+            color: var(--primary);
+        }
+        
+        .active a::before, 
+        .active a::after {
+            opacity: 1;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            border-bottom: var(--pixel-size) solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: inline-block;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--secondary);
+        }
+        
+        .projects-grid, .papers-grid, .contributions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card, .paper-card, .contribution-card {
+            background-color: rgba(0, 0, 51, 0.7);
+            border: var(--pixel-size) solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before, .paper-card::before, .contribution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 0, 0.1));
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover, .paper-card:hover, .contribution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+        
+        .project-card:hover::before, .paper-card:hover::before, .contribution-card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--accent);
+        }
+        
+        h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-description {
+            font-size: 0.7rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .tag {
+            background-color: rgba(0, 255, 0, 0.2);
+            color: var(--primary);
+            padding: 0.2rem 0.5rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.6rem;
+            border-radius: 2px;
+            border: 1px solid var(--primary);
+        }
+        
+        .card-links {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .card-btn {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .card-btn:hover {
+            background-color: var(--primary);
+            color: var(--background);
+        }
+        
+        .retro-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 1rem 0;
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .retro-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .retro-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .retro-btn:hover::before {
+            left: 100%;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 1rem;
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .contact-form {
+            background-color: rgba(0, 0, 51, 0.7);
+            border: var(--pixel-size) solid var(--primary);
+            padding: 2rem;
+            border-radius: 4px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            color: var(--text);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            border-radius: 2px;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+        
+        textarea {
+            min-height: 150px;
+        }
+        
+        button[type="submit"] {
+            background-color: var(--primary);
+            color: var(--background);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(255, 0, 255, 0.3);
+        }
+        
+        footer {
+            background: linear-gradient(to right, #000066, #000044);
+            border-top: var(--pixel-size) solid var(--primary);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-text {
+            font-size: 0.7rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pixel-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .pixel {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0.5;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--accent);
+        }
+        
+        /* Animation for game sprites */
+        .sprite-animation {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent);
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            animation: float 5s ease-in-out infinite;
+            opacity: 0.5;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .projects-grid, .papers-grid, .contributions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+        
+        .loading-text {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        .loading-bar-container {
+            width: 300px;
+            height: 20px;
+            border: var(--pixel-size) solid var(--primary);
+            padding: 3px;
+        }
+        
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary);
+            transition: width 3s ease;
+        }
+        
+        .loading-progress {
+            margin-top: 1rem;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+        
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingProgress = document.getElementById('loading-progress');
+            
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                loadingBar.style.width = `${progress}%`;
+                loadingProgress.textContent = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 1000);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>    <div class="header-content">
+            <div class="profile-container">
+                <div class="profile-photo">
+                    <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt="Profile Photo" class="pixelated">
+                </div>
+                <h1>YOUR NAME</h1>
+                <p class="title">MACHINE LEARNING ENGINEER</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="nav-container">
+        <nav>
+            <ul>
+                <li class="active"><a href="#projects">PROJECTS</a></li>
+                <li><a href="#papers">PAPERS</a></li>
+                <li><a href="#contributions">OPEN SOURCE</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+        <section id="projects">
+            <div class="section-header">
+                <div class="section-icon">⚙️</div>
+                <h2>PROJECTS</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="card-header">
+                        <div class="card-icon">🤖</div>
+                        <h3>ML PROJECT 1</h3>
+                    </div>
+                    <p class="card-description">A deep learning model for image classification using state-of-the-art techniques. Achieved 95% accuracy on benchmark datasets.</p>
+                    <div class="card-tags">
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">CNN</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn" onclick="openModal('project1')">VIEW DETAILS</a>
+                        <a href="#" class="card-btn">NOTEBOOK</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔊</div>
+                        <h3>NLP TRANSFORMER</h3>
+                    </div>
+                    <p class="card-description">Built a transformer-based architecture for natural language understanding tasks with attention mechanisms.</p>
+                    <div class="card-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">Transformers</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn" onclick="openModal('project2')">VIEW DETAILS</a>
+                        <a href="#" class="card-btn">NOTEBOOK</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="card-header">
+                        <div class="card-icon">📊</div>
+                        <h3>REINFORCEMENT LEARNING</h3>
+                    </div>
+                    <p class="card-description">Implementation of RL algorithms for game playing agents with deep Q-learning and policy gradients.</p>
+                    <div class="card-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">RL</span>
+                        <span class="tag">PyTorch</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn" onclick="openModal('project3')">VIEW DETAILS</a>
+                        <a href="#" class="card-btn">NOTEBOOK</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add these additional project cards but initially hidden -->
+            <div class="projects-grid" id="additional-projects" style="display: none;">
+                <div class="project-card">
+                    <div class="card-header">
+                        <div class="card-icon">🎯</div>
+                        <h3>TIME SERIES FORECASTING</h3>
+                    </div>
+                    <p class="card-description">Advanced time series forecasting using LSTM and Transformer models for stock price prediction.</p>
+                    <div class="card-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Time Series</span>
+                        <span class="tag">LSTM</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">VIEW DETAILS</a>
+                        <a href="#" class="card-btn">NOTEBOOK</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔍</div>
+                        <h3>RECOMMENDATION ENGINE</h3>
+                    </div>
+                    <p class="card-description">Collaborative filtering system using matrix factorization and deep learning approaches.</p>
+                    <div class="card-tags">
+                        <span class="tag">RecSys</span>
+                        <span class="tag">Neural Nets</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">VIEW DETAILS</a>
+                        <a href="#" class="card-btn">NOTEBOOK</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modify the button -->
+            <div class="text-center">
+                <a href="#" class="retro-btn" id="view-more-btn" onclick="toggleProjects()">VIEW ALL PROJECTS</a>
+            </div>
+            
+            <!-- Add this script before the closing body tag -->
+            <script>
+            function toggleProjects() {
+                const additionalProjects = document.getElementById('additional-projects');
+                const viewMoreBtn = document.getElementById('view-more-btn');
+                
+                if (additionalProjects.style.display === 'none') {
+                    additionalProjects.style.display = 'grid';
+                    viewMoreBtn.textContent = 'SHOW LESS';
+                    // Smooth scroll to new content
+                    additionalProjects.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    additionalProjects.style.display = 'none';
+                    viewMoreBtn.textContent = 'VIEW ALL PROJECTS';
+                }
+            }
+            </script>
+        </section>
+        
+        <section id="papers">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2>RESEARCH PAPERS</h2>
+            </div>
+            <div class="papers-grid">
+                <div class="paper-card">
+                    <div class="card-header">
+                        <div class="card-icon">📄</div>
+                        <h3>PAPER TITLE 1</h3>
+                    </div>
+                    <p class="card-description">Published in Conference/Journal Name (2023). A novel approach to semi-supervised learning techniques.</p>
+                    <div class="card-tags">
+                        <span class="tag">Semi-supervised</span>
+                        <span class="tag">Deep Learning</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">PDF</a>
+                        <a href="#" class="card-btn">CODE</a>
+                    </div>
+                </div>
+                
+                <div class="paper-card">
+                    <div class="card-header">
+                        <div class="card-icon">📄</div>
+                        <h3>PAPER TITLE 2</h3>
+                    </div>
+                    <p class="card-description">Published in Conference/Journal Name (2022). Efficient training methods for large language models.</p>
+                    <div class="card-tags">
+                        <span class="tag">LLM</span>
+                        <span class="tag">Efficiency</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">PDF</a>
+                        <a href="#" class="card-btn">CODE</a>
+                    </div>
+                </div>
+                
+                <div class="paper-card">
+                    <div class="card-header">
+                        <div class="card-icon">📄</div>
+                        <h3>PAPER TITLE 3</h3>
+                    </div>
+                    <p class="card-description">Published in Conference/Journal Name (2021). Advancements in computer vision for medical imaging.</p>
+                    <div class="card-tags">
+                        <span class="tag">Medical AI</span>
+                        <span class="tag">Computer Vision</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">PDF</a>
+                        <a href="#" class="card-btn">CODE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contributions">
+            <div class="section-header">
+                <div class="section-icon">🌐</div>
+                <h2>OPEN SOURCE</h2>
+            </div>
+            <div class="contributions-grid">
+                <div class="contribution-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔄</div>
+                        <h3>TENSORFLOW</h3>
+                    </div>
+                    <p class="card-description">Contributed to TensorFlow's core library with performance improvements and bug fixes.</p>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">VIEW CONTRIBUTION</a>
+                    </div>
+                </div>
+                
+                <div class="contribution-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔄</div>
+                        <h3>SCIKIT-LEARN</h3>
+                    </div>
+                    <p class="card-description">Implemented new feature selection algorithms and documentation improvements.</p>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">VIEW CONTRIBUTION</a>
+                    </div>
+                </div>
+                
+                <div class="contribution-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔄</div>
+                        <h3>HUGGING FACE</h3>
+                    </div>
+                    <p class="card-description">Added new model architectures and fine-tuning examples to the transformers library.</p>
+                    <div class="card-links">
+                        <a href="#" class="card-btn">VIEW CONTRIBUTION</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-header">
+                <div class="section-icon">📧</div>
+                <h2>CONTACT</h2>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">NAME</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">EMAIL</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">MESSAGE</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit">SEND MESSAGE</button>
+            </form>
